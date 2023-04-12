@@ -1,0 +1,105 @@
+﻿import React, { Component } from "react";
+import axios from 'axios'
+import { variables } from './../../../src/Variables';
+
+export class Employees extends Component {
+    constructor(props) {
+        super(props)
+
+        this.OnEmployeeEdit = this.OnEmployeeEdit.bind(this);
+        this.OnEmployeeDelete = this.OnEmployeeDelete.bind(this);
+        this.onEmployeeCreate = this.onEmployeeCreate.bind(this);
+
+        this.state = {
+            employees: [],
+            loading: true,
+            failed: false,
+            error: ''
+        }
+    }
+
+    /*Lifecycle Method: The componentDidMount() method runs after 
+    the component output has been rendered to the DOM.*/
+
+    componentDidMount() {
+        this.populateEmployeesData();
+    }
+
+    // Event handler for create button
+    onEmployeeCreate() {
+        const { history } = this.props;
+        history.push('/create');
+    }
+
+    // Event handler for edit button
+    OnEmployeeEdit(id) {
+        const { history } = this.props;
+        history.push('/edit/' + id);
+    }
+
+    // Event handler for delete button
+    OnEmployeeDelete(id) {
+        const { history } = this.props;
+        history.push('/delete/' + id);
+    }
+
+    populateEmployeesData() {
+        axios.get(variables.API_URL + "api/Employees/GetEmployees").then(result => {
+            const response = result.data;
+            this.setState({ employees: response, loading: false, error: "" });
+        }).catch(error => {
+            this.setState({ employees: [], loading: false, failed: true, error: "Employess could not be loaded!" });
+        });
+    }
+
+    renderAllEmployeeTable(employees) {
+        return (
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Father's Name</th>
+                        <th>Mother's Name</th>
+                        <th>Date of Birth</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        employees.map(employee => (
+                            <tr key={employee.id}>
+                                <td>{employee.name}</td>
+                                <td>{employee.designation}</td>
+                                <td>{employee.fathersName}</td>
+                                <td>{employee.mothersName}</td>
+                                <td>{new Date(employee.dateOfBirth).toISOString().slice(0, 10)}</td>
+                                <td><button onClick={() => this.OnEmployeeEdit(employee.id)} className="btn btn-success">Edit</button> ||
+                                    <button onClick={() => this.OnEmployeeDelete(employee.id)} className="btn btn-danger">Delete</button></td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        );
+    }
+
+    render() {
+
+        let content = this.state.loading ? (
+            <p>
+                <em>Loading...</em>
+            </p>
+        ) : (
+            this.renderAllEmployeeTable(this.state.employees)
+        )
+
+        return (
+            <div>
+                <h2>Employee</h2>
+                <button onClick={() => this.onEmployeeCreate()} className="btn btn-primary">Create</button>
+                {content}
+            </div>
+        );
+    }
+}
