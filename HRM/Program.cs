@@ -16,14 +16,17 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
-builder.Services.AddCors();
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "MyAllowSpecificOrigins",
         policy =>
         {
-            policy.WithOrigins("https://localhost:44441"); 
+            policy.WithOrigins("https://localhost:44441")
+            .SetIsOriginAllowedToAllowWildcardSubdomains()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+            .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
         });
 });
 

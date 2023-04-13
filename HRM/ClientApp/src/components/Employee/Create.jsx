@@ -1,4 +1,4 @@
-﻿import React, { Component } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { variables } from './../../../src/Variables';
 
@@ -83,27 +83,27 @@ export class Create extends Component {
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label className="control-label">Name: </label>
-                            <input className="form-control" type="text" value={this.state.name} onChange={this.onChangeName}></input>
+                            <input className="form-control" type="text" value={this.state.name || ''} onChange={this.onChangeName}></input>
                         </div>
 
                         <div className="form-group">
                             <label className="control-label">Designation: </label>
-                            <input className="form-control" type="text" value={this.state.designation} onChange={this.onChangeDesignation}></input>
+                            <input className="form-control" type="text" value={this.state.designation || ''} onChange={this.onChangeDesignation}></input>
                         </div>
 
                         <div className="form-group">
                             <label className="control-label">Father's Name: </label>
-                            <input className="form-control" type="text" value={this.state.fathersName} onChange={this.onChangeFathersName}></input>
+                            <input className="form-control" type="text" value={this.state.fathersName || ''} onChange={this.onChangeFathersName}></input>
                         </div>
 
                         <div className="form-group">
                             <label className="control-label">Mother's Name: </label>
-                            <input className="form-control" type="text" value={this.state.mothersName} onChange={this.onChangeMothersName}></input>
+                            <input className="form-control" type="text" value={this.state.mothersName || ''} onChange={this.onChangeMothersName}></input>
                         </div>
 
                         <div className="form-group">
                             <label className="control-label">Date of Birth: </label>
-                            <input className="form-control" type="date" value={this.state.dateOfBirth} onChange={this.onChangeDOB}></input>
+                            <input className="form-control" type="date" value={this.state.dateOfBirth || ''} onChange={this.onChangeDOB}></input>
                         </div>
 
                         <div className="form-group">

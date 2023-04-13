@@ -1,4 +1,4 @@
-﻿import axios from "axios";
+import axios from "axios";
 import React, { Component } from "react";
 import { variables } from './../../../src/Variables';
 
@@ -58,36 +58,36 @@ export class Delete extends Component {
                 <h3>Are you sure you want to delete this?</h3>
                 <div>
                     <h4>Employee</h4>
-                    <dl class="row">
-                        <dt class="col-sm-2">
+                    <dl className="row">
+                        <dt className="col-sm-2">
                             Name:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd className="col-sm-10">
                             {this.state.name}
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt className="col-sm-2">
                             Designation:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd className="col-sm-10">
                             {this.state.designation}
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt className="col-sm-2">
                             Father's Name:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd className="col-sm-10">
                             {this.state.fathersName}
                         </dd>
-                        <dt class="col-sm-2">
+                        <dt className="col-sm-2">
                             Mother's Name:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd className="col-sm-10">
                             {this.state.mothersName}
                         </dd>
 
-                        <dt class="col-sm-2">
+                        <dt className="col-sm-2">
                             Date of Birth:
                         </dt>
-                        <dd class="col-sm-10">
+                        <dd className="col-sm-10">
                             {this.state.dateOfBirth}
                         </dd>
 
@@ -95,7 +95,7 @@ export class Delete extends Component {
 
                     <form onSubmit={this.onConfirmation}>
                         <input type="hidden" asp-for="Id" />
-                        <button type="submit" class="btn btn-danger">Delete</button> |
+                        <button type="submit" className="btn btn-danger">Delete</button> |
                         <button onClick={this.onCancel} className="btn btn-primary">Back to List</button>
                     </form>
                 </div>
